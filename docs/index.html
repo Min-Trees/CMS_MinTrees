@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MindX Course - Tài Liệu Học Tập</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <span class="brand-icon">M</span>
+                <span class="brand-text">MindX Course</span>
+            </div>
+            <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <div class="nav-links" id="navLinks">
+                <a href="#csb" class="nav-link active" data-course="csb">CSB - Python</a>
+                <a href="#csa" class="nav-link" data-course="csa">CSA - Data</a>
+                <a href="#csi" class="nav-link" data-course="csi">CSI - AI</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <!-- CSB Course - Trang mặc định -->
+        <section id="csb" class="page-section active">
+            <div class="course-header csb">
+                <span class="course-badge">CSB - Python Cơ Bản</span>
+                <h1>Giáo Trình Python Cơ Bản</h1>
+                <p>Nền tảng vững chắc về Python, thuật toán và lập trình hướng đối tượng - phù hợp cho người mới bắt đầu hoàn toàn</p>
+                <div class="course-stats">
+                    <div class="course-stat">
+                        <span class="course-stat-number">14</span>
+                        <span class="course-stat-label">Bài học</span>
+                    </div>
+                    <div class="course-stat">
+                        <span class="course-stat-number">21h</span>
+                        <span class="course-stat-label">Tổng thời gian</span>
+                    </div>
+                    <div class="course-stat">
+                        <span class="course-stat-number">100+</span>
+                        <span class="course-stat-label">Bài tập</span>
+                    </div>
+                </div>
+                <button class="btn-start-lesson csb" onclick="openLesson('csb', 1)">
+                    Bắt đầu học ngay
+                </button>
+            </div>
+            <div class="lessons-grid" id="csb-lessons"></div>
+        </section>
+
+        <!-- CSA Course -->
+        <section id="csa" class="page-section">
+            <div class="course-header csa">
+                <span class="course-badge">CSA - Data Science</span>
+                <h1>Giáo Trình Data Science</h1>
+                <p>Phân tích dữ liệu với pandas, trực quan hóa và Machine Learning thực chiến</p>
+                <div class="course-stats">
+                    <div class="course-stat">
+                        <span class="course-stat-number">8</span>
+                        <span class="course-stat-label">Bài học</span>
+                    </div>
+                    <div class="course-stat">
+                        <span class="course-stat-number">12h</span>
+                        <span class="course-stat-label">Tổng thời gian</span>
+                    </div>
+                    <div class="course-stat">
+                        <span class="course-stat-number">50+</span>
+                        <span class="course-stat-label">Bài tập</span>
+                    </div>
+                </div>
+                <button class="btn-start-lesson csa" onclick="openLesson('csa', 1)">
+                    Bắt đầu học ngay
+                </button>
+            </div>
+            <div class="lessons-grid" id="csa-lessons"></div>
+        </section>
+
+        <!-- CSI Course -->
+        <section id="csi" class="page-section">
+            <div class="course-header csi">
+                <span class="course-badge">CSI - AI & Deep Learning</span>
+                <h1>Giáo Trình AI & Deep Learning</h1>
+                <p>Neural Networks, Computer Vision, NLP và các ứng dụng AI hiện đại</p>
+                <div class="course-stats">
+                    <div class="course-stat">
+                        <span class="course-stat-number">14</span>
+                        <span class="course-stat-label">Bài học</span>
+                    </div>
+                    <div class="course-stat">
+                        <span class="course-stat-number">21h</span>
+                        <span class="course-stat-label">Tổng thời gian</span>
+                    </div>
+                    <div class="course-stat">
+                        <span class="course-stat-number">60+</span>
+                        <span class="course-stat-label">Bài tập</span>
+                    </div>
+                </div>
+                <button class="btn-start-lesson csi" onclick="openLesson('csi', 1)">
+                    Bắt đầu học ngay
+                </button>
+            </div>
+            <div class="lessons-grid" id="csi-lessons"></div>
+        </section>
+
+        <!-- Chi tiết bài học -->
+        <section id="lesson-detail" class="page-section">
+            <div class="lesson-container" id="lesson-container"></div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-brand">
+            <span class="brand-icon">M</span>
+            <span>MindX Course</span>
+        </div>
+        <p>Tài liệu học tập Python & AI toàn diện - CSB, CSA, CSI</p>
+        <div class="footer-links">
+            <a href="#csb" onclick="navigateTo('csb')">CSB</a>
+            <a href="#csa" onclick="navigateTo('csa')">CSA</a>
+            <a href="#csi" onclick="navigateTo('csi')">CSI</a>
+        </div>
+    </footer>
+
+    <script src="js/data.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

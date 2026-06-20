@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giáo Trình Python Cơ Bản - CSB | MindX Course</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #10b981;
+            --primary-dark: #059669;
+            --primary-light: #34d399;
+            --accent: #f59e0b;
+            --red: #ef4444;
+            --bg: #fafaf9;
+            --paper: #ffffff;
+            --ink: #1c1917;
+            --ink-soft: #44403c;
+            --muted: #78716c;
+            --border: #e7e5e4;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Nunito', -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--ink);
+            line-height: 1.7;
+        }
+
+        /* ===== Cover Page ===== */
+        .book-cover {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #064e3b 0%, #047857 50%, #10b981 100%);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 60px 40px;
+            text-align: center;
+            page-break-after: always;
+        }
+
+        .cover-badge {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            margin-bottom: 30px;
+            backdrop-filter: blur(10px);
+        }
+
+        .cover-icon {
+            font-size: 6rem;
+            margin-bottom: 30px;
+            filter: drop-shadow(0 8px 20px rgba(0,0,0,0.3));
+        }
+
+        .cover-title {
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: 20px;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+        }
+
+        .cover-subtitle {
+            font-size: 1.5rem;
+            font-weight: 400;
+            opacity: 0.95;
+            max-width: 700px;
+            margin-bottom: 40px;
+        }
+
+        .cover-meta {
+            display: flex;
+            gap: 50px;
+            margin: 40px 0;
+        }
+
+        .cover-meta-item {
+            text-align: center;
+        }
+
+        .cover-meta-num {
+            font-size: 3rem;
+            font-weight: 900;
+            line-height: 1;
+        }
+
+        .cover-meta-label {
+            font-size: 0.9rem;
+            opacity: 0.85;
+            margin-top: 8px;
+        }
+
+        .cover-footer {
+            margin-top: 50px;
+            font-size: 0.95rem;
+            opacity: 0.85;
+        }
+
+        /* ===== Page Container ===== */
+        .page {
+            max-width: 900px;
+            margin: 50px auto;
+            background: var(--paper);
+            padding: 60px 80px;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            page-break-after: always;
+        }
+
+        .page-title {
+            font-size: 2.2rem;
+            font-weight: 900;
+            color: var(--primary-dark);
+            border-bottom: 3px solid var(--primary);
+            padding-bottom: 16px;
+            margin-bottom: 30px;
+        }
+
+        .page-subtitle {
+            font-size: 1.05rem;
+            color: var(--muted);
+            margin-top: -20px;
+            margin-bottom: 30px;
+            font-style: italic;
+        }
+
+        .chapter-num {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 6px;
+            font-weight: 800;
+            font-size: 0.9rem;
+            margin-right: 10px;
+            vertical-align: middle;
+        }
+
+        /* ===== Table of Contents ===== */
+        .toc-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .toc-list li {
+            display: flex;
+            align-items: baseline;
+            padding: 14px 0;
+            border-bottom: 1px dashed var(--border);
+            gap: 16px;
+        }
+
+        .toc-num {
+            color: var(--primary);
+            font-weight: 800;
+            min-width: 40px;
+            font-size: 1.1rem;
+        }
+
+        .toc-title {
+            flex: 1;
+            font-weight: 700;
+            font-size: 1.05rem;
+        }
+
+        .toc-time {
+            color: var(--muted);
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        /* ===== Headings ===== */
+        h2 {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: var(--primary-dark);
+            margin: 35px 0 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--ink);
+            margin: 24px 0 12px;
+        }
+
+        h4 {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--ink-soft);
+            margin: 18px 0 8px;
+        }
+
+        p {
+            margin-bottom: 12px;
+            color: var(--ink-soft);
+        }
+
+        strong { color: var(--ink); font-weight: 700; }
+
+        /* ===== Code Blocks ===== */
+        pre {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 18px 22px;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.88rem;
+            line-height: 1.7;
+            margin: 16px 0;
+            border-left: 4px solid var(--primary);
+        }
+
+        code {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--primary-dark);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.88em;
+            font-weight: 600;
+        }
+
+        pre code {
+            background: transparent;
+            color: inherit;
+            padding: 0;
+            border-radius: 0;
+        }
+
+        /* ===== Tables ===== */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        thead {
+            background: var(--primary);
+            color: white;
+        }
+
+        th, td {
+            padding: 12px 16px;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+
+        th {
+            font-weight: 800;
+            font-size: 0.95rem;
+        }
+
+        tbody tr:hover {
+            background: rgba(16, 185, 129, 0.05);
+        }
+
+        /* ===== Notes and Highlights ===== */
+        .note {
+            background: #fef3c7;
+            border-left: 4px solid var(--accent);
+            padding: 14px 18px;
+            border-radius: 6px;
+            margin: 16px 0;
+        }
+
+        .warning {
+            background: #fee2e2;
+            border-left: 4px solid var(--red);
+            padding: 14px 18px;
+            border-radius: 6px;
+            margin: 16px 0;
+        }
+
+        /* ===== Objectives Section ===== */
+        .objectives-box {
+            background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+            border-left: 4px solid var(--primary);
+            padding: 20px 24px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .objectives-box h3 {
+            color: var(--primary-dark);
+            margin-bottom: 12px;
+        }
+
+        .objectives-box ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .objectives-box li {
+            padding: 6px 0;
+            padding-left: 26px;
+            position: relative;
+        }
+
+        .objectives-box li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+            font-weight: 800;
+        }
+
+        /* ===== Exercise Cards ===== */
+        .exercise-card {
+            background: #f9fafb;
+            border: 1px solid var(--border);
+            border-left: 4px solid var(--primary);
+            padding: 16px 20px;
+            border-radius: 6px;
+            margin: 12px 0;
+        }
+
+        .exercise-card.medium { border-left-color: var(--accent); }
+        .exercise-card.hard { border-left-color: var(--red); }
+
+        .difficulty {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            margin-right: 10px;
+        }
+
+        .difficulty.easy { background: #d1fae5; color: #065f46; }
+        .difficulty.medium { background: #fef3c7; color: #92400e; }
+        .difficulty.hard { background: #fee2e2; color: #991b1b; }
+
+        /* ===== Summary Section ===== */
+        .summary-box {
+            background: #f0f9ff;
+            border-left: 4px solid #3b82f6;
+            padding: 20px 24px;
+            border-radius: 8px;
+            margin: 24px 0;
+        }
+
+        .summary-box h3 {
+            color: #1e40af;
+            margin-bottom: 12px;
+        }
+
+        .summary-box ul {
+            padding-left: 20px;
+        }
+
+        .summary-box li {
+            margin-bottom: 8px;
+        }
+
+        /* ===== Print friendly ===== */
+        @media print {
+            body { background: white; }
+            .page {
+                box-shadow: none;
+                margin: 0;
+                padding: 30px;
+            }
+            .book-cover {
+                min-height: auto;
+                padding: 80px 40px;
+            }
+        }
+
+        /* ===== Back to course link ===== */
+        .back-link {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--primary);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            box-shadow: 0 8px 20px rgba(16, 185, 129, 0.4);
+            z-index: 100;
+        }
+
+        .back-link:hover {
+            background: var(--primary-dark);
+        }
+
+        @media (max-width: 768px) {
+            .page { padding: 30px 25px; margin: 20px 10px; }
+            .cover-title { font-size: 2.2rem; }
+            .cover-meta { gap: 25px; flex-wrap: wrap; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ===== BÌA SÁCH ===== -->
+<div class="book-cover">
+    <span class="cover-badge">📚 CSB · MindX Course</span>
+    <div class="cover-icon">🐍</div>
+    <h1 class="cover-title">Giáo Trình<br>Python Cơ Bản</h1>
+    <p class="cover-subtitle">Từ cú pháp đầu tiên đến thuật toán và lập trình hướng đối tượng</p>
+    <div class="cover-meta">
+        <div class="cover-meta-item">
+            <div class="cover-meta-num">14</div>
+            <div class="cover-meta-label">Bài học</div>
+        </div>
+        <div class="cover-meta-item">
+            <div class="cover-meta-num">21</div>
+            <div class="cover-meta-label">Giờ học</div>
+        </div>
+        <div class="cover-meta-item">
+            <div class="cover-meta-num">100+</div>
+            <div class="cover-meta-label">Bài tập</div>
+        </div>
+    </div>
+    <p class="cover-footer">Phiên bản 2026 · Dành cho người mới bắt đầu</p>
+</div>
+
+<!-- ===== MỤC LỤC ===== -->
+<div class="page">
+    <h1 class="page-title">📖 Mục Lục</h1>
+    <p class="page-subtitle">Lộ trình học Python từ cơ bản đến nâng cao trong 14 buổi</p>
+
+    <ul class="toc-list">
+        <li><span class="toc-num">1</span><span class="toc-title">Cú Pháp Python và Biến</span><span class="toc-time">90 phút</span></li>
+        <li><span class="toc-num">2</span><span class="toc-title">Danh Sách, Hàm và Xử Lý File</span><span class="toc-time">90 phút</span></li>
+        <li><span class="toc-num">3</span><span class="toc-title">Lập Trình Hướng Đối Tượng - Phần 1</span><span class="toc-time">90 phút</span></li>
+        <li><span class="toc-num">4</span><span class="toc-title">Lập Trình Hướng Đối Tượng - Phần 2</span><span class="toc-time">90 phút</span></li>
+        <li><span class="toc-num">5</span><span class="toc-title">Kiểm Tra Định Kỳ Lần 1</span><span class="toc-time">90 phút</span></li>
+        <li><span class="toc-num">6</span><span class="toc-title">Thuật Toán Tìm Kiếm</span><span class="toc-time">90 phút</span></li>
+        <li><span class="toc-num">7</span><span class="toc-title">Thuật Toán Sắp Xếp</span><span class="toc-time">90 phút</span></li>
+        <li><span class="toc-num">8</span><span class="toc-title">Thực Hành Tổng Hợp</span><span class="toc-time">90 phút</span></li>
+        <li><span class="toc-num">9</span><span class="toc-title">Kiểm Tra Định Kỳ Lần 2</span><span class="toc-time">90 phút</span></li>
+        <li><span class="toc-num">10</span><span class="toc-title">Set và Dictionary</span><span class="toc-time">90 phút</span></li>
+        <li><span class="toc-num">11</span><span class="toc-title">Stack và Queue</span><span class="toc-time">90 phút</span></li>
+        <li><span class="toc-num">12</span><span class="toc-title">Luyện Tập và Giải Đề</span><span class="toc-time">180 phút</span></li>
+        <li><span class="toc-num">13</span><span class="toc-title">Tổng Hợp Cuối Khóa</span><span class="toc-time">90 phút</span></li>
+        <li><span class="toc-num">14</span><span class="toc-title">Thi Cuối Khóa CSB</span><span class="toc-time">90 phút</span></li>
+    </ul>
+</div>
+
+<!-- ===== CHƯƠNG 1 ===== -->
+<div class="page">
+    <h1 class="page-title"><span class="chapter-num">Chương 1</span>Cú Pháp Python và Biến</h1>
+    <p class="page-subtitle">Nền tảng quan trọng nhất - làm quen với Python và các khái niệm cơ bản</p>
+
+    <div class="objectives-box">
+        <h3>🎯 Mục tiêu bài học</h3>
+        <ul>
+            <li>Khai báo biến và gán giá trị ngắn gọn</li>
+            <li>Phân biệt 4 kiểu dữ liệu cơ bản (int, float, str, bool)</li>
+            <li>Sử dụng toán tử số học và so sánh</li>
+            <li>Viết chương trình có <code>if/elif/else</code>, <code>for</code>, <code>while</code></li>
+        </ul>
+    </div>
+
+    <h2>📦 1.1 Biến và Kiểu Dữ Liệu</h2>
+    <p><strong>Biến</strong> trong Python là nơi lưu trữ dữ liệu, giống như một chiếc hộp có dán nhãn. Bạn đặt tên cho hộp để dễ nhớ và bỏ giá trị vào bên trong.</p>
+
+    <h3>Quy tắc đặt tên biến</h3>
+    <ul style="margin-left: 20px; margin-bottom: 16px;">
+        <li>✅ Dùng <code>snake_case</code>: tất cả chữ thường, nối bằng dấu gạch dưới</li>
+        <li>✅ Tên phải có ý nghĩa: <code>diem_toan</code>, <code>ten_hoc_sinh</code></li>
+        <li>❌ Không bắt đầu bằng số: <code>1diem</code></li>
+        <li>❌ Không dấu cách: <code>ten hoc sinh</code></li>
+        <li>❌ Không dùng tiếng Việt có dấu</li>
+    </ul>
+
+    <h3>4 kiểu dữ liệu cơ bản</h3>
+    <table>
+        <thead>
+            <tr><th>Kiểu</th><th>Mô tả</th><th>Ví dụ</th></tr>
+        </thead>
+        <tbody>
+            <tr><td><code>int</code></td><td>Số nguyên</td><td><code>tuoi = 16</code></td></tr>
+            <tr><td><code>float</code></td><td>Số thực</td><td><code>diem = 8.5</code></td></tr>
+            <tr><td><code>str</code></td><td>Chuỗi văn bản</td><td><code>ten = "An"</code></td></tr>
+            <tr><td><code>bool</code></td><td>Đúng/Sai</td><td><code>la_hs = True</code></td></tr>
+        </tbody>
+    </table>
+
+    <h2>🔢 1.2 Toán Tử Số Học và So Sánh</h2>
+    <p>Python hỗ trợ đầy đủ các phép toán như máy tính bỏ túi, cộng thêm một số phép đặc biệt rất hữu ích.</p>
+
+    <table>
+        <thead>
+            <tr><th>Ký hiệu</th><th>Ý nghĩa</th><th>Ví dụ</th><th>Kết quả</th></tr>
+        </thead>
+        <tbody>
+            <tr><td><code>+</code></td><td>Cộng</td><td>7 + 3</td><td>10</td></tr>
+            <tr><td><code>-</code></td><td>Trừ</td><td>10 - 4</td><td>6</td></tr>
+            <tr><td><code>*</code></td><td>Nhân</td><td>3 * 4</td><td>12</td></tr>
+            <tr><td><code>/</code></td><td>Chia (ra float)</td><td>7 / 2</td><td>3.5</td></tr>
+            <tr><td><code>//</code></td><td>Chia lấy phần nguyên</td><td>7 // 2</td><td>3</td></tr>
+            <tr><td><code>%</code></td><td>Chia lấy phần dư</td><td>7 % 2</td><td>1</td></tr>
+            <tr><td><code>**</code></td><td>Lũy thừa</td><td>2 ** 10</td><td>1024</td></tr>
+        </tbody>
+    </table>
+
+    <h2>🔀 1.3 Cấu Trúc Điều Kiện</h2>
+    <p>Cấu trúc điều kiện giúp chương trình đưa ra quyết định dựa trên điều kiện. <strong>Quy tắc quan trọng:</strong> dấu <code>:</code> cuối dòng <code>if</code> là BẮT BUỘC, thụt lề 4 dấu cách cho code bên trong.</p>
+
+    <pre><code>diem_tb = 7.5
+
+if diem_tb >= 9.0:
+    xep_loai = "Xuất Sắc"
+elif diem_tb >= 8.0:
+    xep_loai = "Giỏi"
+elif diem_tb >= 6.5:
+    xep_loai = "Khá"
+elif diem_tb >= 5.0:
+    xep_loai = "Trung Bình"
+else:
+    xep_loai = "Yếu"
+
+print(f"Điểm {diem_tb} → Xếp loại: {xep_loai}")</code></pre>
+
+    <h2>🔄 1.4 Vòng Lặp</h2>
+    <p>Vòng lặp giúp thực hiện công việc lặp đi lặp lại nhiều lần. <code>for</code> duyệt qua từng phần tử, <code>while</code> lặp đến khi điều kiện sai.</p>
+
+    <div class="warning">
+        ⚠️ <strong>Cảnh báo:</strong> Vòng while nếu quên thay đổi biến điều kiện sẽ dẫn đến vòng lặp vô tận và máy bị treo!
+    </div>
+
+    <pre><code># Vòng for - in bảng cửu chương
+print("Bảng cửu chương 7:")
+for i in range(1, 11):
+    print(f"  7 x {i:2d} = {7*i}")
+
+# Vòng while - đếm ngược
+dem = 5
+while dem > 0:
+    print(f"  {dem}...")
+    dem -= 1
+print("  Bắt đầu!")</code></pre>
+
+    <div class="summary-box">
+        <h3>📝 Tổng kết chương 1</h3>
+        <ul>
+            <li><strong>Biến</strong> = hộp có nhãn, đặt tên bằng snake_case, không dấu</li>
+            <li><strong>4 kiểu dữ liệu:</strong> int, float, str, bool - input() luôn trả str</li>
+            <li><strong>Toán tử:</strong> + - * / // % **, so sánh: == != > < >= <=</li>
+            <li><strong>if/elif/else:</strong> kiểm tra từ cao xuống thấp, thụt lề 4 dấu cách</li>
+            <li><strong>for</strong> duyệt dãy số, <strong>while</strong> cần thay đổi biến điều kiện</li>
+        </ul>
+    </div>
+
+    <h2>✏️ Bài tập thực hành</h2>
+
+    <div class="exercise-card">
+        <span class="difficulty easy">Dễ</span><strong>Máy Tính Đơn Giản</strong>
+        <p>Nhập 2 số và một phép tính (+, -, *, /). In kết quả. Xử lý chia cho 0.</p>
+        <p style="margin-top: 8px;"><em>💡 Gợi ý: Dùng if/elif/else để chọn phép tính</em></p>
+    </div>
+
+    <div class="exercise-card medium">
+        <span class="difficulty medium">Trung bình</span><strong>Tính Tiền Điện</strong>
+        <p>Nhập số kWh. Tính tiền: 1 kWh = 3.500đ. In ra tổng tiền.</p>
+        <p style="margin-top: 8px;"><em>💡 Gợi ý: tiền = số_kwh × 3500</em></p>
+    </div>
+
+    <div class="exercise-card hard">
+        <span class="difficulty hard">Nâng cao</span><strong>In Hình Tam Giác Sao</strong>
+        <p>Nhập chiều cao (ví dụ 5). In ra tam giác sao đặc.</p>
+        <p style="margin-top: 8px;"><em>💡 Gợi ý: Dùng for lồng nhau hoặc print('*' * i)</em></p>
+    </div>
+</div>
+
+<!-- ===== CHƯƠNG 2 ===== -->
+<div class="page">
+    <h1 class="page-title"><span class="chapter-num">Chương 2</span>Danh Sách, Hàm và Xử Lý File</h1>
+    <p class="page-subtitle">Học cách dùng List để chứa nhiều giá trị, tách code thành hàm và đọc ghi file</p>
+
+    <div class="objectives-box">
+        <h3>🎯 Mục tiêu bài học</h3>
+        <ul>
+            <li>Tạo và thao tác List (thêm, xóa, sắp xếp, truy cập)</li>
+            <li>Định nghĩa hàm với tham số và giá trị trả về</li>
+            <li>Dùng tham số mặc định và list comprehension</li>
+            <li>Đọc và ghi file với <code>open()</code> + <code>with</code></li>
+        </ul>
+    </div>
+
+    <h2>📋 2.1 List - Danh Sách</h2>
+    <p><strong>List</strong> là dãy các phần tử có thứ tự, giống dãy ngăn tủ có đánh số từ 0. Index bắt đầu từ 0, có thể chứa nhiều kiểu dữ liệu, có thể thay đổi được.</p>
+
+    <table>
+        <thead>
+            <tr><th>Cú pháp</th><th>Ý nghĩa</th></tr>
+        </thead>
+        <tbody>
+            <tr><td><code>ds[i]</code></td><td>Truy cập phần tử thứ i</td></tr>
+            <tr><td><code>ds[-1]</code></td><td>Phần tử cuối</td></tr>
+            <tr><td><code>ds.append(x)</code></td><td>Thêm x vào cuối</td></tr>
+            <tr><td><code>ds.insert(i, x)</code></td><td>Chèn x vào vị trí i</td></tr>
+            <tr><td><code>ds.remove(x)</code></td><td>Xóa phần tử có giá trị x</td></tr>
+            <tr><td><code>ds.pop(i)</code></td><td>Xóa và trả về phần tử thứ i</td></tr>
+            <tr><td><code>len(ds)</code></td><td>Độ dài</td></tr>
+            <tr><td><code>ds.sort()</code></td><td>Sắp xếp tại chỗ</td></tr>
+            <tr><td><code>sorted(ds)</code></td><td>Tạo list mới đã sort</td></tr>
+            <tr><td><code>ds[1:4]</code></td><td>Cắt đoạn từ 1 đến 3</td></tr>
+        </tbody>
+    </table>
+
+    <h2>🔧 2.2 Hàm (Function)</h2>
+    <p><strong>Hàm</strong> giúp đóng gói code để tái sử dụng. Giống như máy pha cà phê: bỏ nguyên liệu vào (tham số) → xử lý → ra sản phẩm (return).</p>
+
+    <pre><code>def tinh_trung_binh(danh_sach):
+    """Tính điểm trung bình, trả về 0 nếu list rỗng."""
+    if not danh_sach:
+        return 0
+    return sum(danh_sach) / len(danh_sach)
+
+def xep_loai(diem, he_thang=10):  # Tham số mặc định
+    """Xếp loại theo điểm."""
+    ty_le = diem / he_thang * 10
+    if ty_le >= 9.0:   return "Xuất Sắc"
+    elif ty_le >= 8.0: return "Giỏi"
+    elif ty_le >= 6.5: return "Khá"
+    elif ty_le >= 5.0: return "Trung Bình"
+    else:              return "Yếu"</code></pre>
+
+    <div class="note">
+        💡 <strong>Lưu ý:</strong> Tham số có giá trị mặc định phải đứng SAU trong danh sách tham số. Hàm không có <code>return</code> sẽ trả về <code>None</code>.
+    </div>
+
+    <h2>📂 2.3 Đọc/Ghi File</h2>
+    <p>File giúp lưu dữ liệu vĩnh viễn, không mất khi tắt máy. Luôn dùng <code>with open()</code> và <code>encoding="utf-8"</code> để đọc tiếng Việt đúng.</p>
+
+    <table>
+        <thead>
+            <tr><th>Mode</th><th>Ý nghĩa</th></tr>
+        </thead>
+        <tbody>
+            <tr><td><code>"r"</code></td><td>Đọc (file phải tồn tại)</td></tr>
+            <tr><td><code>"w"</code></td><td>Ghi mới (XÓA nội dung cũ)</td></tr>
+            <tr><td><code>"a"</code></td><td>Ghi tiếp vào cuối (giữ nội dung cũ)</td></tr>
+        </tbody>
+    </table>
+
+    <pre><code>with open("diem_lop.txt", "w", encoding="utf-8") as f:
+    f.write("=== BẢNG ĐIỂM LỚP 10A1 ===\\n")
+    for i in range(len(hoc_sinh)):
+        f.write(f"{hoc_sinh[i]:<10}: {diem[i]:.1f}\\n")
+
+with open("diem_lop.txt", "r", encoding="utf-8") as f:
+    print(f.read())</code></pre>
+
+    <div class="summary-box">
+        <h3>📝 Tổng kết chương 2</h3>
+        <ul>
+            <li>List index bắt đầu từ 0, dùng <code>append/insert/remove/pop</code> để thay đổi</li>
+            <li>Hàm = máy tái sử dụng: <code>def</code> + <code>return</code>, tham số mặc định đứng sau</li>
+            <li>List comprehension: <code>[x for x in ds if dk]</code> - cú pháp ngắn gọn</li>
+            <li>File: luôn dùng <code>with open()</code> + <code>encoding='utf-8'</code> cho tiếng Việt</li>
+        </ul>
+    </div>
+</div>
+
+<!-- ===== Footer ===== -->
+<div class="page" style="text-align: center; padding: 80px 60px;">
+    <div style="font-size: 4rem; margin-bottom: 20px;">🎓</div>
+    <h2 style="font-size: 1.8rem; justify-content: center;">Hết Chương 2</h2>
+    <p style="font-size: 1.1rem; color: var(--muted); margin: 20px 0;">
+        Tiếp tục với các chương sau trong khóa học:<br>
+        OOP · Thuật Toán · Stack/Queue · Project Cuối Khóa
+    </p>
+    <a href="index.html#csb" style="display: inline-block; background: var(--primary); color: white; padding: 14px 28px; border-radius: 8px; text-decoration: none; font-weight: 700; margin-top: 20px;">
+        📚 Mở khóa học đầy đủ
+    </a>
+</div>
+
+<a href="index.html" class="back-link">← Về trang chính</a>
+
+</body>
+</html>
